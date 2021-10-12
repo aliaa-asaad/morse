@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Aliaa/Projects/Android/Morse_Glasses/app/src/main/res/layout/activity_main.xml" value="0.1331521739130435" />
+        <entry key="..\:/Aliaa/Projects/Android/Morse_Glasses/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Aliaa/Projects/Android/Morse_Glasses/app/src/main/res/layout/activity_second_astivity.xml" value="0.2" />
+        <entry key="..\:/Aliaa/Projects/Android/Morse_Glasses/app/src/main/res/layout/devicesbt.xml" value="0.1" />
       </map>
     </option>
   </component>
