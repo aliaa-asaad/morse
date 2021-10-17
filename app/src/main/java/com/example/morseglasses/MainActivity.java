@@ -27,6 +27,7 @@ String Tag="Bluetooth devices";
 
 
     }
+
     @Override
     protected void onResume(){
 super.onResume();
@@ -40,7 +41,7 @@ super.onResume();
         mBTadapter =BluetoothAdapter.getDefaultAdapter();
 
         Set <BluetoothDevice> devices=mBTadapter.getBondedDevices();
-        //Adapter بياخد اللاي اوت ويحطها علي الليست فيو
+        //Adapter
         ArrayAdapter<String>mpairedArrayAdapter=new ArrayAdapter<String>(this,R.layout.devicesbt);
         //Adapter - ListView
         paireddevicesList.setAdapter(mpairedArrayAdapter);

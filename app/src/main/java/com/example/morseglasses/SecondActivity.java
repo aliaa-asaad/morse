@@ -25,7 +25,7 @@ BluetoothAdapter mBTadapter;
     BluetoothSocket btSocket;
     StringBuilder sb= new StringBuilder();
     String Tag="Bluetooth devices";
-
+Handler h;
     //serial port Bluetooth device
 public static final UUID My_UUID =UUID.fromString("00001101-0000-1000-8000-00805F9B34F0");
 public int Received_msg=1;
@@ -37,11 +37,15 @@ TextView dataTextView;
         setContentView(R.layout.activity_second_astivity);
         mBTadapter =BluetoothAdapter.getDefaultAdapter();
         dataTextView=(TextView) findViewById(R.id.dataTextView);
-        Handler h=new Handler(){
+        //بيساعد الثريد انها تشتغل هيخليني اخزن كل بايت مع بعضها وبعدين اقوم عارضاها يعني بيجمع المسدج وبعدين يعرضها مرة واحدة عالليست فيو
+         h=new Handler(){
             public void handlerMessage(android.os.Message msg){
+                //بتتشيك في مسدج جاية ولا لا
                 switch (msg.what){
                     case 1:
                         byte [] readBUF=(byte[]) msg.obj;
+                        //بتحول المسدج من بايت لاسترنج
+                        //الاوفسيت دي بداية المسدج
                         String strIncom=new String(readBUF,0,msg.arg1);
                         sb.append(strIncom);
                         //end_point
@@ -86,12 +90,18 @@ s=s+""+sbprint;
         //socket
         try {
             btSocket=createBluetoothSocket(device);
+            //delete search
             mBTadapter.cancelDiscovery();
             btSocket.connect();
             connectThread n=new connectThread(btSocket);
             n.start() ;
         } catch (IOException e) {
-
+            try {
+                //اقفل الكونيكشن لو فيه مشكلة
+                btSocket.close();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
             e.printStackTrace();
         }
     }
@@ -112,10 +122,13 @@ connectThread(BluetoothSocket socket){
 
 }
 @Override
+//بقرا الداتا من البلوتوث
     public void run(){
     byte [] buffer=new byte[256];
+    //بيرجع حجم المسدج اللي اتقرات
     int bytes;
     //read data from arduino to mobile
+   while (true){
     try {
        bytes= mmInstream.read(buffer);
        //handler
@@ -123,16 +136,9 @@ connectThread(BluetoothSocket socket){
        //text view
     } catch (IOException e) {
         e.printStackTrace();
-    }
+    }}
 }
-    public void write(String msg){
-        byte[] msgbyte=msg.getBytes();
-        try {
-            mmOutstream.write(msgbyte);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    
 
 
 }
